@@ -1,6 +1,6 @@
 class AnimalsController < ApplicationController
   def index 
-    animal = Animals.all
+    animals = Animal.all
     render json: animals
   end
 
@@ -12,7 +12,10 @@ class AnimalsController < ApplicationController
   def create
     animal = Animal.create(animal_params)
     if animal.valid?
+      render json: animal
+    else 
       render json: animal.errors
+    end
   end
 
   def destroy
@@ -21,6 +24,7 @@ class AnimalsController < ApplicationController
       render json: animal
     else 
       render json: animal.errors
+    end
   end
 
   def update
@@ -33,9 +37,8 @@ class AnimalsController < ApplicationController
     end
   end
 
-    private
-    strong params
-    def student_params
-      params.require(:animal).permit(:common_name, :scientific_binomial)
-    end
+  private 
+  def animal_params
+    params.require(:animal).permit(:common_name, :scientific_binomial)
+  end
 end
