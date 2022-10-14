@@ -39,3 +39,4 @@ class AnimalsController < ApplicationController
       params.require(:animal).permit(:common_name, :scientific_binomial)
     end
 end
+
